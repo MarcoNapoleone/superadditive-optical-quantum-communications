@@ -1,0 +1,58 @@
+=====	Optilux, Apr 2021 =====
+
+Paolo Serena <serena@tlc.unipr.it> 
+dept. of Engineering and Architecture, University of Parma, Italy 
+https://optilux.sourceforge.io
+
+================================================================================
+WHAT?
+
+Optilux is an open-source collection of algorithms to design, simulate, and 
+analyze optical communication systems. Optilux is implemented as a Matlab/Octave 
+toolbox and efficiently exploits the most advanced tools for system analysis.
+
+Optilux is released under the GNU General public license, version 3.
+
+================================================================================
+INSTALLATION
+
+The installation is simple: copy the directory where you like, and add it to 
+the Matlab/Octave path, for instance by entering the following statement 
+under the Matlab/Octave command window (once per session):
+
+addpath path_of_optilux
+
+where path_of_optilux must be substituted with the true path. For old hardware,
+the speed of the code can be increased by compiling the *.c files within the 
+optilux directory using the MEX interface.	
+The compilation can be done by running:
+
+mex filename.c
+
+NOTE: The compilation of .c files can fail because Matlab is unable to find
+the correct c++-standard-library. In this case, edit your mexopts.sh file
+(you can create it in ~/.matlabxx/mexopts.sh by running mex -setup in Matlab)
+and replace the line:
+
+CLIBS="$RPATH $MLIBS -lm -lstdc++"
+
+by, (e.g. if you have Matlab in /opt)
+
+CLIBS="$RPATH $MLIBS -lm /opt/matlab/sys/os/glnx86/libstdc++.so.5"
+
+Another solution under Debian-based Linux systems is to run the following: 
+
+apt-get install build-essential 
+
+This package contains an informational list of packages which are considered 
+essential for building Debian packages.
+
+===============================================================================
+USAGE
+
+Each function has its detailed help. Start by running the examples in the
+subdirectory Examples/.
+
+
+Have fun 
+Paolo

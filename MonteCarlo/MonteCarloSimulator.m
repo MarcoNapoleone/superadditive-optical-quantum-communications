@@ -91,19 +91,11 @@ classdef MonteCarloSimulator
         end
         
         % Calculates the mean of the simulation results.
-        %
-        % Returns:
-        %   meanResult (double): The mean of the simulation results.
-        function meanResult = calculateMean(obj)
-            meanResult = mean(obj.results);
-        end
         
-        % Calculates the standard deviation of the simulation results.
-        %
-        % Returns:
-        %   stdResult (double): The standard deviation of the simulation results.
-        function stdResult = calculateStd(obj)
+        function [meanResult, stdResult, quartiles] = calculateResult(obj)
+            meanResult = mean(obj.results);
             stdResult = std(obj.results);
+            quartiles = quantile(obj.results, [0.25, 0.75]);
         end
 
         % Plots the results of the simulations as a histogram.

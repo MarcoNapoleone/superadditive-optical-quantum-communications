@@ -36,8 +36,7 @@ mc = MonteCarloSimulator(numSimulations, simulationFunc, epsilon);
 mc = mc.runSimulations();
 
 % Step 6: Calculate the mean and standard deviation of the simulation results
-meanResult = mc.calculateMean();  % Calculate the mean of the results
-stdResult = mc.calculateStd();    % Calculate the standard deviation of the results
+[meanResult,stdResult, ~] = mc.calculateResult();  % Calculate the mean of the results
 
 % Display the calculated mean and standard deviation
 fprintf('Mean of the results: %.4f\n', meanResult);
