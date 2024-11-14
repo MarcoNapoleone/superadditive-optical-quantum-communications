@@ -8,8 +8,8 @@ h = 6.62607015e-34; % Planck constant [J·Hz^(-1)]
 c = 299792458; % Light speed [m/s]
 lambda = 1550e-9; % Wavelength of the laser [m]
 nu = c / lambda; % Frequency of the laser [Hz]
-B = 10e8; % Baud rate in Hz
-P = 1e-12; % Signal power in W
+B = 1e9; % Baud rate in Hz
+P = 1e-11; % Signal power in W
 M = 128; % Number of codewords Hadamard/Fourier
 N_symbols = 8192; % Number of transmission frames
 m = floor(M / 2); % Selected port for simulation
@@ -20,7 +20,7 @@ SNR = 10 .^ (SNRdB / 10); % Convert SNR from dB to linear scale
 
 %% Monte Carlo settings
 N_simulations = 10e7; % Number of Monte Carlo simulations
-epsilon = 1e-5; % Early stopping criterion for Monte Carlo simulation
+epsilon = 1e-2; % Early stopping criterion for Monte Carlo simulation
 
 %% Preallocating the symbols
 % Randomly generate symbols to be transmitted from M possible codewords
@@ -45,6 +45,7 @@ n_R_H = P / (h * nu * B) * log2(M); % Mean photon number for Green Machine
 n_R_F = P / (h * nu * B) * log2(M); % Mean photon number for Fourier Machine
 
 fprintf("The mean photon number n_R is: %f\n", n_R_H)
+fprintf("The power P in dbm is: %f\n", 10 * log10(P / 1e-3))
 
 %% Loop over the SNR values
 for idx = 1:length(SNR)
@@ -84,28 +85,48 @@ for idx = 1:length(SNR)
 end
 
 %% Plot Results with Error Bars
-figure;
+f = figure;
+f.Position = [10, 10, 550, 550];  % Set figure size
 
-colors = {'#098bf8', '#fe5f55'}; % Colors for Green and Fourier Machines
+colors = {'#098bf8', '#fe5f55'};  % Colors for Green and Fourier Machines
 
-% Theoretical curves
+% Adjust axes position to leave space for the legend outside the plot
+ax = gca;
+ax.Position = [0.1, 0.2, 0.82, 0.63];  % Adjust axes position to give space above for the legend
+
+% Plot Theoretical Hadamard
 semilogy(SNRdB, BER_teo_H, '-.', 'LineWidth', 1.5, 'Color', colors{1}, 'DisplayName', "Theoretical Hadamard");
 hold on;
-scatter(SNRdB, BER_sim_H , 'o', 'MarkerFaceColor', colors{1}, 'MarkerFaceAlpha', 0.3, 'MarkerEdgeColor', colors{1}, 'MarkerEdgeAlpha', 1, 'DisplayName', "Numerical Hadamard");
 
+% Plot Numerical Hadamard with scatter
+scatter(SNRdB, BER_sim_H, 'o', 'MarkerFaceColor', colors{1}, 'MarkerFaceAlpha', 0.3, ...
+        'MarkerEdgeColor', colors{1}, 'MarkerEdgeAlpha', 1, 'DisplayName', "Numerical Hadamard");
+
+% Plot Theoretical Fourier
 semilogy(SNRdB, BER_teo_F, '-', 'LineWidth', 1.5, 'Color', colors{2}, 'DisplayName', "Theoretical Fourier");
-scatter(SNRdB, BER_sim_F , 'd', 'MarkerFaceColor', colors{2}, 'MarkerFaceAlpha', 0.3, 'MarkerEdgeColor', colors{2}, 'MarkerEdgeAlpha', 1, 'DisplayName', "Numerical Fourier");
+
+% Plot Numerical Fourier with scatter
+scatter(SNRdB, BER_sim_F, 'd', 'MarkerFaceColor', colors{2}, 'MarkerFaceAlpha', 0.3, ...
+        'MarkerEdgeColor', colors{2}, 'MarkerEdgeAlpha', 1, 'DisplayName', "Numerical Fourier");
+
 hold off;
 
 % Graph settings
-legend();
 xlabel('SNR (dB)');
 ylabel('SER');
 grid on;
 
+% Adjust legend to be above the plot, with 2 columns
+lgd = legend('NumColumns', 2, 'Location', 'northoutside');
+lgd.Position(2) = 0.85;  % Adjust vertical position of the legend to ensure consistency
 
-%export pdf
-exportgraphics(gcf, 'output/BERvsSNR_MonteCarlo.pdf')
+% Set consistent axes limits if needed
+xlim([min(SNRdB), max(SNRdB)]);
+ylim([1e-3, 1.5]);  % Adjust as needed
+
+% Export the figure as a PDF
+exportgraphics(gcf, 'output/BERvsSNR_MonteCarlo.pdf');
+
 
 %% Theoretical BER Calculation Functions
 % Hadamard (Green Machine) theoretical BER calculation
