@@ -36,9 +36,9 @@ The project evaluates the performance of the superadditive quantum communication
 </head>
 <body>
     <div class="image-row">
-        <img src="BERvsSNR_M-1.png" alt="BER vs SNR for M=1">
-        <img src="BERvsSNR_nR_y-1.png" alt="BER vs SNR for nR_y=1">
-        <img src="BERvsSNR_MonteCarlo-1.png" alt="BER vs SNR for Monte Carlo">
+        <img src="Main/output/BERvsSNR_M-1.png" alt="BER vs SNR for M=1">
+        <img src="Main/output/BERvsSNR_nR_y-1.png" alt="BER vs SNR for nR_y=1">
+        <img src="Main/output/BERvsSNR_MonteCarlo-1.png" alt="BER vs SNR for M=1 (Monte Carlo)">
     </div>
 </body>
 </html>
