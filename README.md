@@ -21,27 +21,15 @@ This project explores the theoretical foundations and challenges of integrating 
 
 ## Results
 The project evaluates the performance of the superadditive quantum communication system in a noisy channel, comparing the Hadamard and Fourier machines.
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Images in a Row</title>
-    <style>
-        .image-row img {
-            width: 200px;
-            display: inline-block;
-        }
-    </style>
-</head>
-<body>
-    <div class="image-row">
-        <img src="Main/output/BERvsSNR_M-1.png" alt="BER vs SNR for M=1">
-        <img src="Main/output/BERvsSNR_nR_y-1.png" alt="BER vs SNR for nR_y=1">
-        <img src="Main/output/BERvsSNR_MonteCarlo-1.png" alt="BER vs SNR for M=1 (Monte Carlo)">
-    </div>
-</body>
-</html>
+## Results
+The project evaluates the performance of the superadditive quantum communication system in a noisy channel, comparing the Hadamard and Fourier machines.
+
+### Performance Evaluation
+Below are the results of the Bit Error Rate (BER) versus Signal-to-Noise Ratio (SNR) for different configurations:
+
+![BER vs SNR for M=1](Main/output/BERvsSNR_M-1.png)
+![BER vs SNR for nR_y=1](Main/output/BERvsSNR_nR_y-1.png)
+![BER vs SNR for M=1 (Monte Carlo)](Main/output/BERvsSNR_MonteCarlo-1.png)
 
 ## Contact
 For any questions or issues, please contact Gabriella Cincotti at gabriella.cincotti@uniroma3.it.
